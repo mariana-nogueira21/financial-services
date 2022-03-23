@@ -24,10 +24,10 @@ public class LivroCaixaController {
     LivroCaixaService livroCaixaService;
 
     @PostMapping
-    public ResponseEntity<Object> saveLivroCaixa(@RequestBody @Valid LivroCaixaDto livroCaixaDto) {
-        var livroCaixaModel = new LivroCaixaModel();
+    public ResponseEntity<Object> saveLivroCaixa(@RequestBody @Valid LivroCaixaModel livroCaixaModel) {
+        //var livroCaixaModel = new LivroCaixaModel();
         //conversão do Dto para Model
-        BeanUtils.copyProperties(livroCaixaDto, livroCaixaModel);
+        //BeanUtils.copyProperties(livroCaixaDto, livroCaixaModel);
         livroCaixaModel.setDataLancamento(LocalDate.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(livroCaixaService.save(livroCaixaModel));
     }
@@ -58,13 +58,13 @@ public class LivroCaixaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateLivroCaixa(@PathVariable(value = "id")Integer id,
-                                                   @RequestBody @Valid LivroCaixaDto livroCaixaDto) {
+                                                   @RequestBody @Valid LivroCaixaModel livroCaixaModel) {
         Optional<LivroCaixaModel> livroCaixaModelOptional = livroCaixaService.findById(id);
         if (!livroCaixaModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Livro caixa não encontrado.");
         }
-        var livroCaixaModel = new LivroCaixaModel();
-        BeanUtils.copyProperties(livroCaixaDto, livroCaixaModel);
+        //var livroCaixaModel = new LivroCaixaModel();
+        //BeanUtils.copyProperties(livroCaixaDto, livroCaixaModel);
         livroCaixaModel.setId(livroCaixaModelOptional.get().getId());
         livroCaixaModel.setDataLancamento(livroCaixaModelOptional.get().getDataLancamento());
         return ResponseEntity.status(HttpStatus.OK).body(livroCaixaService.save(livroCaixaModel));

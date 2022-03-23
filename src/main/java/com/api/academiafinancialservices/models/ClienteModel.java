@@ -1,9 +1,11 @@
 package com.api.academiafinancialservices.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.exc.InvalidNullException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_cliente")
@@ -39,6 +41,10 @@ public class ClienteModel {
 
     @Column(length = 100)
     private String email;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("cliente")
+    private List<LivroCaixaModel> livroCaixa;
 
     public int getId() {
         return id;
@@ -118,5 +124,13 @@ public class ClienteModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<LivroCaixaModel> getLivroCaixa() {
+        return livroCaixa;
+    }
+
+    public void setLivroCaixa(List<LivroCaixaModel> livroCaixa) {
+        this.livroCaixa = livroCaixa;
     }
 }

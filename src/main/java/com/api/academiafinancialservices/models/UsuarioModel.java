@@ -30,12 +30,13 @@ public class UsuarioModel {
     @Column(length = 100)
     private String email;
 
-    @Column(nullable = false)
-    private char perfil;
+    @Column(nullable = false, length = 1)
+    private String perfil;
 
-    @Column(nullable = false)
-    private char status;
+    @Column(nullable = false, length = 1)
+    private String status;
 
+    //Getters e Setters
     public int getId() {
         return id;
     }
@@ -92,19 +93,19 @@ public class UsuarioModel {
         this.email = email;
     }
 
-    public char getPerfil() {
+    public String getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(char perfil) {
+    public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

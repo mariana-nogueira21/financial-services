@@ -1,6 +1,5 @@
 package com.api.academiafinancialservices.dtos;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -39,6 +38,8 @@ public class ClienteDto {
     public String getNome() {
         return nome;
     }
+
+
 
     public void setNome(String nome) {
         this.nome = nome;

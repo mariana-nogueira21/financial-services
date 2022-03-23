@@ -14,7 +14,7 @@ public class LivroCaixaDto {
     private String descricao;
 
     @NotBlank
-    private char tipo;
+    private String tipo;
 
     @NotNull
     private BigDecimal valor;
@@ -27,11 +27,11 @@ public class LivroCaixaDto {
         this.descricao = descricao;
     }
 
-    public char getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(char tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

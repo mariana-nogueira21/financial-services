@@ -1,5 +1,7 @@
 package com.api.academiafinancialservices.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
@@ -19,12 +21,16 @@ public class LivroCaixaModel {
     @Column(nullable = false, length = 50)
     private String descricao;
 
-    @Column(nullable = false)
-    private char tipo;
+    @Column(nullable = false, length = 1)
+    private String tipo;
 
     @Column(nullable = false)
     @Digits(integer = 4, fraction = 2)
     private BigDecimal valor;
+
+    @ManyToOne
+    @JsonIgnoreProperties("livroCaixa")
+    private ClienteModel cliente;
 
     public int getId() {
         return id;
@@ -50,11 +56,11 @@ public class LivroCaixaModel {
         this.descricao = descricao;
     }
 
-    public char getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(char tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -64,5 +70,13 @@ public class LivroCaixaModel {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public ClienteModel getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteModel cliente) {
+        this.cliente = cliente;
     }
 }

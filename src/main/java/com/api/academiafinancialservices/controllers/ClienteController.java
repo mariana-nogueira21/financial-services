@@ -24,10 +24,10 @@ public class ClienteController {
     ClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<Object> saveCliente(@RequestBody @Valid ClienteDto clienteDto) {
-        var clienteModel = new ClienteModel();
+    public ResponseEntity<Object> saveCliente(@RequestBody @Valid ClienteModel clienteModel) {
+        //var clienteModel = new ClienteModel();
         //conversão do Dto para Model
-        BeanUtils.copyProperties(clienteDto, clienteModel);
+        //BeanUtils.copyProperties(clienteDto, clienteModel);
         clienteModel.setDataCadastro(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(clienteModel));
     }
@@ -58,13 +58,13 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateCliente(@PathVariable(value = "id")Integer id,
-                                                @RequestBody @Valid ClienteDto clienteDto) {
+                                                @RequestBody @Valid ClienteModel clienteModel) {
         Optional<ClienteModel> clienteModelOptional = clienteService.findById(id);
         if (!clienteModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
         }
-        var clienteModel = new ClienteModel();
-        BeanUtils.copyProperties(clienteDto, clienteModel);
+        //var clienteModel = new ClienteModel();
+        //BeanUtils.copyProperties(clienteDto, clienteModel);
         clienteModel.setId(clienteModelOptional.get().getId());
         clienteModel.setDataCadastro(clienteModelOptional.get().getDataCadastro());
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.save(clienteModel));
